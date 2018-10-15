@@ -12,8 +12,8 @@
     "server:start": "nodemon --watch build --exec node \"./src/server/server.js\"",
     "build": "npm run client && npm run server",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.client.js",
-    "es:lint": "eslint --ext .js --ext .jsx build/",
-    "precommit": "npm run es:lint"
+    "lint": "eslint --ext .js --ext .jsx build/",
+    "precommit": "npm run lint"
   },
   "repository": {
     "type": "git",
