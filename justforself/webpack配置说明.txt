@@ -1,0 +1,56 @@
+我们开始啦
+
+1. github上创建项目
+
+   (1) .gitignore 指的是上传的时候不需要把哪些上传上去，比如build,node_modules等
+   (2)  README.md github上项目的介绍
+
+2. 空项目  npm init 一下，创建一个npm的项目
+
+3. .editorconfig 文件，是统一代码风格
+
+4. ESLint 用于js代码检查
+
+5. 安装Express，来构建node端的服务器
+   npm install express --save
+
+   同时再在根路径下组建一个express的服务器代码
+
+6. 创建一个src / container / test /index.js
+   用react写一个很简单的组件，因为要用到react，所以需要去安装react
+   安装react
+   npm install react --save
+   同时，就算安装好了，在node端也无法使用，原因是node遵循的是common.js的js规范，
+   不支持import／export这种esModule的语法，所以，需要配置webpack来做打包处理，把jsx语法打包成普通的js语法
+
+7. 安装webpack 4 及webpack的合并第三方
+   npm install webpack webpack-cli webpack-merge --save
+
+   在根目录下创建webpack.config.js文件
+
+8. 配置webpack,（路径都使用绝对路径好，防止不同的操作系统的差异）,react的jsx需要通过webpack编译打包浏览器才能识别
+   (1). 在配置的过程中，加入一个rules为检测.js结尾的文件，
+        因为我们写的时候会用到es6语法，所以需要进行语法的编译，
+        那我们需要babel-loader,而使用babel-loader我们还需要加入babel的核心库babel-core
+        npm install babel-loader babel-core --save
+
+   (2). 在配置过程中，当我们使用babel-loader的时候，在下面去选择去使用一些编译的规则，
+        options 选择  presets 规则,是一个数组,而且还可以嵌套数组
+        比如我们在使用babel-loader编译的时候会有编译react的代码
+        那我们就可以在presets里面加入react,保证对react代码进行正确编译
+        但是要使用presets,就要在npm中安装这个presets
+        npm install babel-preset-react --save  //组成的命令为  babel + preset(不是presets) + 你要正确编译的东西
+
+   (3). 在配置过程中，我们会用到es6及以上的语法，那么需要presets里面加一个stage-0,
+        同样需要安装
+        npm install babel-preset-stage-0 --save
+
+   (4). 在配置过程中，我们会用到env来设置兼容浏览器的版本，env
+        同样需要安装
+        npm install babel-preset-env --save
+
+   (5). 在配置过程中，我们定义了target:'node',那服务端打包的时候不需要将一些node_moudle中的第三方打包进入（普通react客户端是需要打包进去的）
+        那么就需要webpack-node-externals这个包
+        npm install webpack-node-externals --save
+        同时需要配置一下，
+        externals:[nodeExternals()],
