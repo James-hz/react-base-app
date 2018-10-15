@@ -11,23 +11,36 @@
 
 4. ESLint 用于js代码检查
 
+
+服务端
 5. 安装Express，来构建node端的服务器
    npm install express --save
 
    同时再在根路径下组建一个express的服务器代码
+
 
 6. 创建一个src / container / test /index.js
    用react写一个很简单的组件，因为要用到react，所以需要去安装react
    安装react
    npm install react --save
    同时，就算安装好了，在node端也无法使用，原因是node遵循的是common.js的js规范，
-   不支持import／export这种esModule的语法，所以，需要配置webpack来做打包处理，把jsx语法打包成普通的js语法
-
+   不支持import／export这种esModule的语法，
+   所以，需要配置webpack来做打包处理，把jsx语法打包成普通的js语法
 
 7. 安装webpack 4 及webpack的合并第三方
    npm install webpack webpack-cli webpack-merge --save
 
    在根目录下创建webpack.config.js文件
+
+   webpack4 需要加入一个
+   mode:"development"  //表示什么环境
+
+   服务端：
+      target:"node",  //指定webpack是给node打包的，这样path这些node包就不需要全部打包进入bundle.js了
+      externals:[nodeExternals()],  //配合上面的
+      所以服务端需要安装
+      npm install webpack-node-externals --save
+
 
 8. 配置webpack,react的jsx需要通过webpack编译打包浏览器才能识别
    (1). 在配置的过程中，加入一个rules为检测.js结尾的文件，
@@ -50,8 +63,44 @@
         同样需要安装
         npm install @babel/preset-env --save
 
-   (5). 在配置过程中，我们定义了target:'node',那服务端打包的时候不需要将一些node_moudle中的第三方打包进入（普通react客户端是需要打包进去的）
-        那么就需要webpack-node-externals这个包
-        npm install webpack-node-externals --save
-        同时需要配置一下，
-        externals:[nodeExternals()],
+9. 可以在packge.json,里面加入一句话，
+   "build": "webpack --config ./webpack.server.js"  //打包进入bundle.js
+   "start": "node ./build/bundle.js"    //启动bundle.js
+   打包出来看看是否配置正确
+   npm run build
+   npm run start
+
+10. 成功后，我们就可以使用import exports 这些了，因为webpack给我们打包后会把这些转换了
+
+
+11.服务端
+   需要用react-dom来渲染react的代码
+   npm install react-dom --save,
+   同时需要用到renderToString方法，将Home组件转化为字符串形式,参数是jsx语法组件
+   同时还需要加入基本的标签
+   同时用到了jsx，所以需要导入react
+
+12.设置webpack自动打包，服务器自动重启
+   改build命令，里面加一个 --watch ，监听webpack 入口文件index.js，包括这个文件里面加载的任何东西改变，就自动打包
+   服务器自动重启，借助于第三方 nodemon 来做监听
+   npm install nodemon -g  //全局安装
+   改start命令
+   start:"nodemon --watch build --exec node \"./build/bundle.js\""
+   //nodemon监听build文件夹，一旦发生改变，就执行node启动服务器
+
+   这里需要打开2个终端运行
+   npm run build
+   npm run start
+
+13.优化，只开一个终端来操作，借助第三方 npm-run-all
+   npm install npm-run-all -g  //全局安装
+   同时package.json修改如下，parallel并行执行下面2条命令
+   "dev":"npm-run-all --parallel dev:**",
+   "dev:start":"nodemon --watch build --exec node \"./build/bundle.js\"",
+   "dev:build": "webpack --config ./webpack.server.js --watch"
+   最后启动 npm run dev 就可以了
+
+
+
+
+

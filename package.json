@@ -1,0 +1,64 @@
+{
+  "name": "react-base-app",
+  "version": "1.0.0",
+  "description": "js react base app",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "client": "npm-run-all --parallel client:**",
+    "client:clear": "rimraf build",
+    "client:build": "webpack --config ./webpack.client.js",
+    "server": "npm-run-all --parallel server:**",
+    "server:build": "webpack --config ./webpack.server.js --watch",
+    "server:start": "nodemon --watch build --exec node \"./src/server/server.js\"",
+    "build": "npm run client && npm run server",
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.client.js",
+    "es:lint": "eslint --ext .js --ext .jsx build/",
+    "precommit": "npm run es:lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/James-hz/react-base-app.git"
+  },
+  "author": "js",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/James-hz/react-base-app/issues"
+  },
+  "homepage": "https://github.com/James-hz/react-base-app#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "install": "^0.12.1",
+    "npm": "^6.4.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-merge": "^4.1.4",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-stage-0": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "hasky": "^3.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "react-hot-loader": "^4.0.0",
+    "rimraf": "^2.6.2",
+    "webpack-dev-server": "^3.1.9"
+  }
+}

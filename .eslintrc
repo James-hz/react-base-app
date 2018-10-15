@@ -1,21 +1,3 @@
-module.exports = {
-  "extends": ["eslint:recommended"],
-  "relus": {
-    "no-console": ["error",{
-      "allow": ["warn","error","info"]
-    }]
-  },
-  "parser": "bable-eslint",
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "script"
-  },
-  "globals":{
-    "window":true
-  },
-  "env":{
-    "node":true,
-    "es6":true,
-    "mocha":true
-  }
+{
+  "extends": "standard"
 }

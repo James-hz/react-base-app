@@ -1,0 +1,26 @@
+# <代码风格> https://EditorConfig.org
+
+# 根目录，到顶层了
+root = true
+
+# 匹配所有的文件
+[*]
+
+# 所有文件，都用utf-8编码
+charset = utf-8
+
+# 所有文件，缩进，用空格来缩进，用2个空格
+indent_style = space
+indent_size = 2
+
+# 所有文件，用unix风格回车，最后一行要加一个回车,尾部的空白删除
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# 所有的json文件缩进4
+[*.json]
+indent_size = 2
+
+
+

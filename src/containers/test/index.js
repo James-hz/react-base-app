@@ -3,8 +3,8 @@
  */
 import React from 'react';
 
-const Main = () => {
-  return <div>main</div>
+const Test = () => {
+  return <div>test,haha</div>
 }
 
-export default Main;
+export default Test;

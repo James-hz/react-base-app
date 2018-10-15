@@ -8,5 +8,53 @@
    <div id="root">
      <app></app>
    </div>
+<script>
+
+  //str.repeat(2)
+  const s = '3[a]2[bc]';  //aaabcbc
+  const s1 = '3[a2[c]]';  //accaccacc
+  const s2 = '2[abc]3[cd]ef'; //abcabccdcdcdef
+//
+
+  var str1 = s.split('[') + '';
+  var str = str1.split(']') + '';
+
+  console.log("测试====",str);
+
+
+
+
+
+  var r = /^.+?\[(.+?)\].+?\[(.+?)\].*$/;
+
+//  var str = pattern.exec(s1)[0];
+//
+//  var str1 = pattern.exec(str)[0];
+
+  //console.log(str1)
+
+//  if(str.indexOf("[") > 0){
+//    var str = pattern.exec(s1);
+//  }
+
+
+//  var r = /^.+?\[(.+?)\].+?\[(.+?)\].*$/;
+//
+//  var r1 = /\[(.+?)\]/g;
+//
+//  console.log(r.exec(s));
+//
+//  console.log(s1.match(r1));
+
+//  function decodeString(str){
+//    var str1 = str.split('[') + '';
+//    var str2 = str1.split(']') + '';
+//    //var str2 = str1.split(']');
+//
+//    console.log(str2)
+//  }
+//  decodeString(s1);
+
+</script>
 </body>
 </html>
