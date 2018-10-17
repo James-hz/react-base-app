@@ -203,3 +203,21 @@
     接着用第三方工具 hasky
     npm install hasky -D
     最后在package.json里面添加命令
+    "lint": "eslint --ext .js --ext .jsx build/",
+    "precommit": "npm run lint",这个是git commit上传时的钩子，会先进行这个命令，没问题才执行git commit
+
+15. 配置webpack-merge,提取公共配置
+
+
+16. 服务端 dev-static.js
+    配置服务端开发环境下的同构处理
+    1.获取html的template
+    2.获取webpack打包之后的bundle.js
+    因为服务端开发环境下是不存在build下文件的
+    我们就需要获取模版，所以用axios（客户端、服务端都可以使用），通过http请求获取template的HTML模版
+    安装 axios
+    npm install axios -S
+    因为需要获取的是webpack打包之后的bundle.js，但是读取到这个文件不能写在磁盘上，因为很慢，所以需要用到一个
+    memory-fs的第三方，来把bundle.js放到内存中读取，快
+    npm install memory-fs -D
+

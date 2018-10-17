@@ -1,10 +1,11 @@
 const path = require('path');
 const HTMLPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-
+const webpackMerge = require('webpack-merge');
+const webpackBase = require('./webpack.base.js');
 const isDev = process.env.NODE_ENV === 'development' ? true : false;
 
-const config = {
+const config = webpackMerge(webpackBase,{
   mode:'development',
   entry:{
     client: path.resolve(__dirname,'./src/client/entry.js')
@@ -21,12 +22,7 @@ const config = {
         test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
         loader: "eslint-loader"
-      },
-      {
-        test: /\.(js|jsx)?$/,
-        exclude: /node_modules/,
-        loader: "babel-loader"
-      },
+      }
     ]
   },
   plugins:[
@@ -34,7 +30,7 @@ const config = {
       template:path.resolve(__dirname,'./src/template.html')
     })
   ]
-}
+})
 
 if(isDev){
   config.entry = {

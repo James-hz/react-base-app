@@ -1,7 +1,8 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+const webpackMerge = require('webpack-merge');
+const webpackBase = require('./webpack.base.js');
 
-module.exports = {
+module.exports = webpackMerge(webpackBase, {
   target:'node',
   mode:'development',
   entry:{
@@ -12,15 +13,5 @@ module.exports = {
     path:path.resolve(__dirname, 'build'),
     publicPath:'/public/',
     libraryTarget:'commonjs2'
-  },
-  externals:[nodeExternals()],
-  module:{
-    rules:[
-      {
-        test: /\.(js|jsx)?$/,
-        exclude: /node_modules/,
-        loader: "babel-loader"
-      }
-    ]
   }
-}
+})
